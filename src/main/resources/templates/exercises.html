@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>List of Exercises</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div>
+		<div>
+			<h1>Exercises</h1>
+		</div>
+		<table>
+			<tr>
+				<th>Exercise</th>
+				<th>Muscle Group</th>
+				<th>Reps</th>
+				<th>Weight</th>
+				<th>Type</th>
+			
+			</tr>
+			
+				<tr th:each="exercise: ${exercises}">
+					<td th:text="${exercise.name}"></td>
+					<td th:text="${exercise.muscleGroup.name}"></td>
+					<td th:text="${exercise.reps}"></td>
+					<td th:text="${exercise.weight + ' Kg'}"></td>
+					<td th:text="${exercise.type.name}"></td>
+				</tr>
+
+			
+
+		</table>
+
+		<a href="/add">Add Exercise</a>
+		
+	</div>
+</body>
+</html>
