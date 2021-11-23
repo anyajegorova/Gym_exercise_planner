@@ -3,19 +3,31 @@
 <head>
 <title>List of Exercises</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"
+	th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
-	<div>
-		<div>
+	<div class="container">
+		<div class="col-md-4">
 			<h1>Exercises</h1>
 		</div>
-		<table>
+	<div class="col-md-4">
+			<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn-sm btn-danger" />
+		</form>
+	</div>
+		
+		<table class="table table-striped">
 			<tr>
 				<th>Exercise</th>
 				<th>Muscle Group</th>
 				<th>Reps</th>
 				<th>Weight</th>
 				<th>Type</th>
+				<th sec:authorize="hasAuthority('ADMIN')"> </th>
 			
 			</tr>
 			
@@ -25,13 +37,14 @@
 					<td th:text="${exercise.reps}"></td>
 					<td th:text="${exercise.weight + ' Kg'}"></td>
 					<td th:text="${exercise.type.name}"></td>
+					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${exercise.id})}" class="btn btn-xs btn-danger">Delete</a></td>
 				</tr>
 
 			
 
 		</table>
 
-		<a href="/add">Add Exercise</a>
+		<a href="/add" class="btn btn-success">Add Exercise</a>
 		
 	</div>
 </body>

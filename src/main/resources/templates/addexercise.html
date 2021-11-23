@@ -7,32 +7,34 @@
 	th:href="@{css/bootstrap.min.css}">
 </head>
 <body>
-	<div>
-		<h2>Add exercises</h2>
-		<div>
+	<div class="container">
+		<h2>Add Exercises</h2>
+		<div class="col-md-4">
+		
 			<form th:object="${exercise}" th:action="@{save}" action="#"
 				method="post">
 				
 			<label for="name">Exercise name</label>
-			<input type="text" id="exercise" th:field="*{name}"/>
+			<input type="text" id="exercise" th:field="*{name}" class="form-control"/>
 			
 			<label for="muscleGrouplist">Muscle Group</label>
-			<select id="muscleGrouplist" th:field="*{muscleGroup}">
-				<option th:each="exercise : ${exercises}" th:value="${muscleGroup.muscleGroupId}" th:text="${muscleGroup.name}"></option>
+			<select id="muscleGrouplist" th:field="*{muscleGroup}" class="form-control">
+				<option th:each="muscleGroup: ${muscleGroups}" th:value="${muscleGroup.groupId}" th:text="${muscleGroup.name}"></option>
 			</select>
 			
 			<label for="reps">Reps</label>
-			<input type="number" id="reps" th:field="*{reps}"/>
+			<input type="number" id="reps" th:field="*{reps}" class="form-control"/>
 			
 			<label for="weight">Weight</label>
-			<input type="number" id="weight" th:field="*{weight}"/>
+			<input type="number" id="weight" th:field="*{weight}" class="form-control"/>
 			
 			<label for="typelist">Type</label>
-			<select id="typelist" th:field="*{type}">
-				<option th:each="type : ${types}" th:value="${type.typeId}" th:text="${type.name}"></option>
+			<select id="typelist" th:field="*{type}" class="form-control">
+				<option th:each="type: ${types}" th:value="${type.typeId}" th:text="${type.name}"></option>
 			</select>
 			<div style="clear: both; display: block; height: 10px;"></div>
 				<input type="submit" class="btn btn-primary" value="Save"></input>
+				<a type="button" class="btn btn-primary" href="/exercises">Cancel</a>
 			</form>
 
 		</div>
