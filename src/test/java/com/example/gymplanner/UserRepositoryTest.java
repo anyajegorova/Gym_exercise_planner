@@ -1,24 +1,28 @@
 package com.example.gymplanner;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import static org.assertj.core.api.Assertions.*;
 
-import com.example.gymplanner.web.GymController;
+import com.example.gymplanner.domain.User;
+import com.example.gymplanner.domain.UserRepository;
+
+
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class GymplannerApplicationTests {
-	
+public class UserRepositoryTest {
 	@Autowired
-	private GymController controller;
-
+	private UserRepository repository;
+	
 	@Test
-	public void contextLoads() throws Exception {
-		assertThat(controller).isNotNull();
+	public void findByUsernameShouldReturnUser() {
+		User users = repository.findByUsername("user");
+		assertThat(users.getPasswordHash()).isNotNull();		
+		
 	}
-
 }
