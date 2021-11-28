@@ -27,7 +27,8 @@
 				<th>Reps</th>
 				<th>Weight</th>
 				<th>Type</th>
-				<th sec:authorize="hasAuthority('ADMIN')"> </th>
+				<th>Picture</th>
+				<th sec:authorize="hasAuthority('ADMIN')"></th>
 			
 			</tr>
 			
@@ -37,6 +38,7 @@
 					<td th:text="${exercise.reps}"></td>
 					<td th:text="${exercise.weight + ' Kg'}"></td>
 					<td th:text="${exercise.type.name}"></td>
+					<td><img th:src="@{${exercise.picturePath}}"></td>
 					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${exercise.id})}" class="btn btn-xs btn-danger">Delete</a></td>
 				</tr>
 

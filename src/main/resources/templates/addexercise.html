@@ -12,7 +12,7 @@
 		<div class="col-md-4">
 		
 			<form th:object="${exercise}" th:action="@{save}" action="#"
-				method="post">
+				method="post" enctype="multipart/form-data">
 				
 			<label for="name">Exercise name</label>
 			<input type="text" id="exercise" th:field="*{name}" class="form-control"/>
@@ -32,6 +32,10 @@
 			<select id="typelist" th:field="*{type}" class="form-control">
 				<option th:each="type: ${types}" th:value="${type.typeId}" th:text="${type.name}"></option>
 			</select>
+			<label for="fileUpload">Upload Picture</label>
+			
+			<input type="file" class="form-control" name="fileImage" id="fileImage" accept="image/png, image/jpeg ">
+			<img id="image" alt="Picture preview">
 			<div style="clear: both; display: block; height: 10px;"></div>
 				<input type="submit" class="btn btn-primary" value="Save"></input>
 				<a type="button" class="btn btn-primary" href="/exercises">Cancel</a>

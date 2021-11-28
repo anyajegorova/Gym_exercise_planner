@@ -1,5 +1,11 @@
 package com.example.gymplanner.web;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,10 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.gymplanner.domain.Exercise;
 import com.example.gymplanner.domain.ExerciseRepository;
@@ -49,8 +58,27 @@ public class GymController {
 
 	// Save new exercise
 	@RequestMapping(value = "/save")
-	public String saveExercise(Exercise exercise) {
-		repository.save(exercise);
+
+	public String saveExercise(Exercise exercise, @RequestParam("fileImage") MultipartFile multipartFile)
+			throws IOException {
+		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+		exercise.setPicture(fileName);
+
+		Exercise savedExercise = repository.save(exercise);
+
+		String uploadDir = "./exercise-picture/" + savedExercise.getId();
+		Path uploadPath = Paths.get(uploadDir);
+
+		if (!Files.exists(uploadPath)) {
+			Files.createDirectories(uploadPath);
+		}
+
+		try (InputStream inputStream = multipartFile.getInputStream()) {
+			Path filePath = uploadPath.resolve(fileName);
+			Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+			throw new IOException("Cold not save uploaded file:" + fileName);
+		}
 		return "redirect:exercises";
 	}
 
