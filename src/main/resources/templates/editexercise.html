@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Edit exercise exercise</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link type="text/css" rel="stylesheet"
+	th:href="@{css/bootstrap.min.css}">
+</head>
+<body>
+	<div class="container" >
+		<h2>Edit exercise</h2>
+		<div class="col-md-4">
+		
+			<form th:object="${exercise}" th:action="@{save}" action="#"
+				method="post" enctype="multipart/form-data">
+				
+			<label for="name">Exercise name</label>
+			<input type="text" id="exercise" th:field="*{name}" class="form-control"/>
+			
+			<label for="muscleGrouplist">Muscle Group</label>
+			<select id="muscleGrouplist" th:field="*{muscleGroup}" class="form-control">
+				<option th:each="muscleGroup: ${muscleGroups}" th:value="${muscleGroup.groupId}" th:text="${muscleGroup.name}"></option>
+			</select>
+			
+			<label for="reps">Reps</label>
+			<input type="text" id="reps" th:field="*{reps}" class="form-control"/>
+			
+			<label for="weight">Weight (in kilos)</label>
+			<input type="number" id="weight" th:field="*{weight}" class="form-control"/>
+			
+			<label for="typelist">Type</label>
+			<select id="typelist" th:field="*{type}" class="form-control">
+				<option th:each="type: ${types}" th:value="${type.typeId}" th:text="${type.name}"></option>
+			</select>
+			<div class="mb-3">
+			<label for="formFile" class="form-label">Upload Picture</label>
+			
+			<input class="form-control" id="formFile" type="file" name="fileImage" accept="image/png, image/jpeg ">
+			</div>
+			<div style="clear: both; display: block; height: 10px;"></div>
+				<input type="submit" class="btn btn-primary" value="Save"></input>
+				<a type="button" class="btn btn-light" href="/exercises">Cancel</a>
+			</form>
+
+		</div>
+	</div>
+</body>
+</html>
