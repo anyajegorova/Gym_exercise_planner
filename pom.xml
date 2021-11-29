@@ -15,7 +15,7 @@
 	<name>gymplanner</name>
 	<description>Gym exercise planning app</description>
 	<properties>
-		<java.version>8</java.version>
+		<java.version>11</java.version>
 	</properties>
 	
 	<dependencies>
