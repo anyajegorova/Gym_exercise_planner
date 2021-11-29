@@ -7,7 +7,7 @@
 	th:href="@{css/bootstrap.min.css}">
 </head>
 <body>
-	<div class="container">
+	<div class="container" >
 		<h2>Add Exercises</h2>
 		<div class="col-md-4">
 		
@@ -25,20 +25,21 @@
 			<label for="reps">Reps</label>
 			<input type="text" id="reps" th:field="*{reps}" class="form-control"/>
 			
-			<label for="weight">Weight</label>
+			<label for="weight">Weight (in kilos)</label>
 			<input type="number" id="weight" th:field="*{weight}" class="form-control"/>
 			
 			<label for="typelist">Type</label>
 			<select id="typelist" th:field="*{type}" class="form-control">
 				<option th:each="type: ${types}" th:value="${type.typeId}" th:text="${type.name}"></option>
 			</select>
-			<label for="fileUpload">Upload Picture</label>
+			<div class="mb-3">
+			<label for="formFile" class="form-label">Upload Picture</label>
 			
-			<input type="file" class="form-control" name="fileImage" id="fileImage" accept="image/png, image/jpeg ">
-			<img id="image" alt="Picture preview">
+			<input class="form-control" id="formFile" type="file" name="fileImage" accept="image/png, image/jpeg ">
+			</div>
 			<div style="clear: both; display: block; height: 10px;"></div>
 				<input type="submit" class="btn btn-primary" value="Save"></input>
-				<a type="button" class="btn btn-primary" href="/exercises">Cancel</a>
+				<a type="button" class="btn btn-light" href="/exercises">Cancel</a>
 			</form>
 
 		</div>

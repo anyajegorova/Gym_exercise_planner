@@ -22,7 +22,7 @@ public class TypeRepositoryTest {
 	@Test
 	public void findByNameReturnsType() {
 		List<Type> types = trepository.findByName("Warmup");
-		assertThat(types.get(0).getTypeId()).isEqualTo(1);
+		assertThat(types.get(0).getTypeId()).isEqualTo(156);
 	}
 
 }

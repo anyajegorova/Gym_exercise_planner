@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import com.example.gymplanner.web.UserDetailServiceImpl;
@@ -29,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserDetailServiceImpl userDetailsService;
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
+		((HttpSecurity) http
 		.authorizeRequests().antMatchers("/css/**").permitAll()
 		.and()
 		.authorizeRequests().antMatchers("/signup","/saveuser").permitAll()
@@ -42,6 +43,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.defaultSuccessUrl("/exercises", true)
 		.permitAll()
 		.and()
+	.oauth2Login()
+		.loginPage("/login")
+		.defaultSuccessUrl("/exercises", true)
+		.userInfoEndpoint()
+		.userService(oAuth2UserService)
+	.and()
+	.and())
 	.logout()
 		.permitAll();
 	}
@@ -76,6 +84,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new InMemoryUserDetailsManager(users);
 		
 	}
+	@Autowired
+	private OAuth2UserService oAuth2UserService;
 	
 
 }

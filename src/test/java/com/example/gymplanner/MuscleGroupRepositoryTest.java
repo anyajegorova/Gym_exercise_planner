@@ -20,8 +20,8 @@ public class MuscleGroupRepositoryTest {
 	
 	@Test
 	public void findByNameReturnsMuscleGroup() {
-		List<MuscleGroup> muscleGroups = mrepository.findByName("Chest");
-		assertThat(muscleGroups.get(0).getGroupId()).isEqualTo(1);
+		List<MuscleGroup> muscleGroups = mrepository.findByName("Back");
+		assertThat(muscleGroups.get(0).getGroupId()).isEqualTo(161);
 		
 	}
 

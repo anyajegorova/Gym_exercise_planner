@@ -1,12 +1,14 @@
 package com.example.gymplanner.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
+
+import org.springframework.data.annotation.Transient;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -20,12 +22,12 @@ public class Exercise {
 	private double weight;
 	private String picture;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "typeId")
 	@JsonManagedReference
 	private Type type;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "groupId")
 	@JsonManagedReference
 	private MuscleGroup muscleGroup;
@@ -104,8 +106,9 @@ public class Exercise {
 	// Returning image path to the exercise picture
 	@Transient
 	public String getPicturePath() {
-		if (picture == null || id == null)
+		if (picture == null || id == null) {
 			return null;
+		}
 
 		return "/exercise-picture/" + id + "/" + picture;
 	}

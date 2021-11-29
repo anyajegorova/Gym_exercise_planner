@@ -8,8 +8,10 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Sign-up</h1>
-		<div class="col-md-4">
+		
+		<div class="col-md-4" style="margin: 0 auto; padding: 10px;">
+			<h2 >Sign Up</h2>
+			<h6 style="color: grey; font-style: italic">Please, fill in this form to create an account</h6>
 			<form th:object="${signupform}" th:action="@{/saveuser}" action="#"
 				method="post">
 				<div>
@@ -32,6 +34,7 @@
 				</div>
 
 				<input type="submit" class="btn btn-primary" value="Signup"></input>
+				<a type="button" class="btn btn-light" href="/login">Back</a>
 			</form>
 		</div>
 	</div>

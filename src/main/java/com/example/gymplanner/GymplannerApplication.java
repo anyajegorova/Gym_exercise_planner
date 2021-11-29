@@ -27,7 +27,7 @@ public class GymplannerApplication {
 	@Bean
 	public CommandLineRunner demo(ExerciseRepository repository, TypeRepository trepository, MuscleGroupRepository mrepository, UserRepository urepository) {
 		return (args) -> {
-			
+
 			log.info("fetch all exercises");
 			for (Exercise exercise : repository.findAll()) {
 				log.info(exercise.toString());
