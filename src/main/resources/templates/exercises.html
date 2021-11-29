@@ -29,18 +29,20 @@
 				<th>Type</th>
 				<th>Picture</th>
 				<th sec:authorize="hasAuthority('ADMIN')"></th>
+				<th sec:authorize="hasAuthority('ADMIN')"></th>
 			
 			</tr>
 			
-				<tr th:each="exercise: ${exercises}">
-					<td th:text="${exercise.name}"></td>
-					<td th:text="${exercise.muscleGroup.name}"></td>
-					<td th:text="${exercise.reps}"></td>
-					<td th:text="${exercise.weight + ' Kg'}"></td>
-					<td th:text="${exercise.type.name}"></td>
-					<td><img th:src="@{${exercise.picturePath}}" style="width: 100px"></td>
-					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${exercise.id})}" class="btn btn-xs btn-danger">Delete</a></td>
-				</tr>
+			<tr th:each="exercise: ${exercises}">
+				<td th:text="${exercise.name}"></td>
+				<td th:text="${exercise.muscleGroup.name}"></td>
+				<td th:text="${exercise.reps}"></td>
+				<td th:text="${exercise.weight + ' Kg'}"></td>
+				<td th:text="${exercise.type.name}"></td>
+				<td><img th:src="@{${exercise.picturePath}}" style="width: 100px"></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${exercise.id})}" class="btn btn-xs btn-primary">Edit</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${exercise.id})}" class="btn btn-xs btn-danger">Delete</a></td>
+			</tr>
 
 			
 
